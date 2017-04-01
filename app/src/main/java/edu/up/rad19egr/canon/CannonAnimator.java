@@ -2,28 +2,39 @@ package edu.up.rad19egr.canon;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.MotionEvent;
 
 /**
  * Created by PouyaRad on 3/29/17.
  */
 
-public class CanonAnimator implements Animator {
+public class CannonAnimator implements Animator {
+
+    public SmallTarget target1 = new SmallTarget(5, 1000, 200);
+    public LargeTarget target2 = new LargeTarget(15, 1300, 400);
+    public Cannon mainCanon = new Cannon();
+    public AnimationBase base = new AnimationBase(0, 1140, 1600, 1400);
+    public int count = 0;
+
 
     @Override
     public int interval() {
-        return 0;
+        return 30;
     }
 
     @Override
     public int backgroundColor() {
-        return Color.BLUE;
+        return Color.WHITE;
     }
 
     @Override
     public void tick(Canvas c) {
-        SmallTarget smallTarget1 = new SmallTarget(10, 50, 50);
-        smallTarget1.drawTarget(c);
+        target1.drawTarget(c);
+        target2.drawTarget(c);
+        mainCanon.drawCanon(c);
+        base.drawBase(c);
+
     }
 
     @Override
