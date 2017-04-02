@@ -8,13 +8,13 @@ import android.graphics.Paint;
  * Created by PouyaRad on 4/1/17.
  */
 
+// This class draws a simple "ground" on which the cannon rests
 public class AnimationBase {
 
     private float left;
     private float top;
     private float right;
     private float bottom;
-
 
     public AnimationBase(int left, int top, int right, int bottom) {
         this.left = (float) left;

@@ -34,7 +34,7 @@ public abstract class Target {
     public void setIsHit(boolean hit) {
         if(hit) {
             isHit = true;
-            paintBrush.setColor(Color.GREEN);
+            paintBrush.setColor(Color.RED);
         }
     }
 
@@ -49,12 +49,6 @@ public abstract class Target {
             paintBrush.setColor(Color.GREEN);
         }
     }
-
-    /*
-    public void drawTargetBase(Canvas canvas, int x, int y) {
-        canvas.drawRect((float) x, (float) y, 20f, (float)canvas.getHeight(), new Paint(Color.DKGRAY));
-    }
-    */
 
     public abstract void drawTarget(Canvas canvas);
 

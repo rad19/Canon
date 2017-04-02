@@ -1,5 +1,7 @@
 package edu.up.rad19egr.canon;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,10 +15,9 @@ public class CannonAnimator implements Animator {
 
     public SmallTarget target1 = new SmallTarget(5, 1000, 200);
     public LargeTarget target2 = new LargeTarget(15, 1300, 400);
-    public Cannon mainCanon = new Cannon();
+    public Cannon mainCannon = new Cannon();
     public AnimationBase base = new AnimationBase(0, 1140, 1600, 1400);
-    public int count = 0;
-
+    private int count = 0;
 
     @Override
     public int interval() {
@@ -25,16 +26,15 @@ public class CannonAnimator implements Animator {
 
     @Override
     public int backgroundColor() {
-        return Color.WHITE;
+        return Color.rgb(180, 200, 255);
     }
 
     @Override
     public void tick(Canvas c) {
+        base.drawBase(c);
         target1.drawTarget(c);
         target2.drawTarget(c);
-        mainCanon.drawCanon(c);
-        base.drawBase(c);
-
+        mainCannon.drawCanon(c);
     }
 
     @Override
@@ -48,8 +48,17 @@ public class CannonAnimator implements Animator {
     }
 
     @Override
+    @TargetApi(23)
     public void onTouch(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_BUTTON_PRESS) {
+            if(event.getActionButton() == R.id.increaseAngleButton) {
+                mainCannon.increaseAngle();
+            } else if(event.getActionButton() == R.id.decreaseAngleButton) {
+                mainCannon.decreaseAngle();
+            } else if(event.getActionButton() == R.id.fireCannonBallButton) {
+                mainCannon.fire();
+            }
 
+        }
     }
-
 }
