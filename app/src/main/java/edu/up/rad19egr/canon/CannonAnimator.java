@@ -16,8 +16,11 @@ public class CannonAnimator implements Animator {
     public SmallTarget target1 = new SmallTarget(5, 1000, 200);
     public LargeTarget target2 = new LargeTarget(15, 1300, 400);
     public Cannon mainCannon = new Cannon();
+    public Cannonball ball = new Cannonball(mainCannon.getPosition().x, mainCannon.getPosition().y, mainCannon.getRadAngle(), 10);
     public AnimationBase base = new AnimationBase(0, 1140, 1600, 1400);
+    public boolean isFired = false;
     private int count = 0;
+    private Paint p = new Paint(Color.WHITE);
 
     @Override
     public int interval() {
@@ -31,10 +34,18 @@ public class CannonAnimator implements Animator {
 
     @Override
     public void tick(Canvas c) {
+        count++;
+        double time = (double) count / 1000;
+        int num = count * 15;
         base.drawBase(c);
         target1.drawTarget(c);
         target2.drawTarget(c);
         mainCannon.drawCanon(c);
+        if(isFired) {
+            ball.move(time, num);
+            ball.drawCannonball(c);
+
+        }
     }
 
     @Override
@@ -48,17 +59,25 @@ public class CannonAnimator implements Animator {
     }
 
     @Override
-    @TargetApi(23)
     public void onTouch(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_BUTTON_PRESS) {
-            if(event.getActionButton() == R.id.increaseAngleButton) {
-                mainCannon.increaseAngle();
-            } else if(event.getActionButton() == R.id.decreaseAngleButton) {
-                mainCannon.decreaseAngle();
-            } else if(event.getActionButton() == R.id.fireCannonBallButton) {
-                mainCannon.fire();
-            }
 
-        }
     }
+
+    public void increaseCannonAngle() {
+        mainCannon.increaseAngle();
+    }
+
+    public void decreaseCannonAngle() {
+        mainCannon.decreaseAngle();
+    }
+
+    public int getCannonAngle() {
+        return mainCannon.getDegAngle();
+    }
+
+    public void fireCannon() {
+        ball = mainCannon.fire();
+        this.isFired = true;
+    }
+
 }

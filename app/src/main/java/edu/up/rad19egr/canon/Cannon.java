@@ -14,16 +14,15 @@ import java.util.ArrayList;
 
 public class Cannon {
 
-    private int cannonBallCount;
+    private int cannonBallCount = 10;
     private double radAngle;
     private int degAngle;
     private Paint paintBrush = new Paint();
     private Point position = new Point(100, 1100);
 
     public Cannon() {
-        this.degAngle = 25;
+        this.degAngle = 45;
         this.radAngle = (double) degAngle * Math.PI / 180.0;
-        this.cannonBallCount = 10;
     }
 
     public void drawCanon(Canvas canvas) {
@@ -68,9 +67,14 @@ public class Cannon {
         setAngle(degAngle);
     }
 
-    public double getCurrentAngle() {
+    public int getDegAngle() {
         return this.degAngle;
     }
+
+    public double getRadAngle() {
+        return this.radAngle;
+    }
+
 
     public void setAngle(int newAngle) {
         this.degAngle = newAngle;
@@ -79,15 +83,15 @@ public class Cannon {
 
     public Cannonball fire() {
         this.cannonBallCount--;
-        if(cannonBallCount >= 0) {
-            Cannonball cb = new Cannonball(position.x, position.y, radAngle, 10);
-            return cb;
-        }
-        return null;
+        return new Cannonball(this.getPosition().x, this.getPosition().y, this.getRadAngle(), 100);
     }
 
     public int getCannonBallCount() {
         return this.cannonBallCount;
+    }
+
+    public Point getPosition() {
+        return this.position;
     }
 
 }
