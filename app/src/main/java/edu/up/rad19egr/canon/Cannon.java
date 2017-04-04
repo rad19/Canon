@@ -137,7 +137,7 @@ public class Cannon {
     // remaining.
     // It returns a new Cannonball object that starts at the center of the
     // cannon with the angle that it was fired at and an arbitrarily chosen
-    // initial velocity of 500.
+    // initial velocity.
     public Cannonball fire() {
         this.cannonBallCount--;
         return new Cannonball((int)(this.getPosition().x - 19 +

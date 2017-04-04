@@ -14,6 +14,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by PouyaRad on 3/29/17.
  */
@@ -24,9 +27,14 @@ public class CannonAnimator implements Animator {
     public AnimationBase base = new AnimationBase(0, 1140, 1600, 1400);
 
     // Small, medium, and large targets to be aimed at, respectively.
-    public SmallTarget target1 = new SmallTarget(5, 1000, 200);
-    // public MediumTarget target2 = new MediumTarget();
-    public LargeTarget target3 = new LargeTarget(15, 1300, 400);
+    public SmallTarget target1 = new SmallTarget(5, 1000, 200, false);
+    public MediumTarget target2 = new MediumTarget(25, 1400, 100, false);
+    public LargeTarget target3 = new LargeTarget(50, 1300, 400, false);
+
+    // An ArrayList of Targets to store all of the targets to be used in the
+    // animation.
+    public ArrayList<Target> targetList = new ArrayList<Target>
+                             (Arrays.asList(target1, target2, target3));
 
     // The Cannon for the animation.
     public Cannon mainCannon = new Cannon();
@@ -35,11 +43,11 @@ public class CannonAnimator implements Animator {
     public Cannonball ball;
 
     // A boolean indicating if the Cannon has been fired.
-    public boolean isFired = false;
+    private boolean isFired = false;
 
     // A boolean indicating if the current Cannonball, should it exist, is on
     // the animation's portion of the screen.
-    public boolean isBallOnScreen = false;
+    private boolean isBallOnScreen = false;
 
     // An integer, keeping track of the ticks for the animation.
     private int count = 0;
@@ -90,6 +98,10 @@ public class CannonAnimator implements Animator {
         // Cannonball class's "move" method.
         double t = (10 * (time - fireTime) / 1000);
 
+        for(Target target : targetList) {
+            target.drawTarget(c);
+        }
+
         // Check to see if a cannonball has been fired and then begin drawing
         // its motion.
         if(isBallOnScreen) {
@@ -101,8 +113,6 @@ public class CannonAnimator implements Animator {
         // Draw the base of the animation, the cannon (depending on its angle),
         // and all of the targets to be used.
         base.drawBase(c);
-        target1.drawTarget(c);
-        target3.drawTarget(c);
         mainCannon.drawCanon(c);
 
         // Check to see if there is a Cannonball created.
@@ -123,6 +133,16 @@ public class CannonAnimator implements Animator {
                 time = 0;
             }
         }
+
+        for(int i = 0; i < targetList.size(); i++) {
+            Target currTarget = targetList.get(i);
+            if(isBallOnScreen && currTarget.containsPoint((int)ball.getCurrX(), (int)ball.getCurrY())) {
+                currTarget.setIsHit(true);
+                currTarget.score();
+                currTarget.drawTarget(c);
+            }
+        }
+
     }
 
     // Tells whether the animation should be paused.

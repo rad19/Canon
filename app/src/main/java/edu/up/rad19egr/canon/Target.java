@@ -10,6 +10,7 @@ package edu.up.rad19egr.canon;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 /**
  * Created by PouyaRad on 3/29/17.
@@ -17,20 +18,29 @@ import android.graphics.Paint;
 
 public abstract class Target {
 
-    protected int pointValue;
+    private int xCor;
 
-    protected Paint paintBrush = new Paint();
+    private int yCor;
 
-    protected boolean isHit = false;
+    private int height;
 
-    protected int xCor;
+    private int width = 20;
 
-    protected int yCor;
+    private int hitBuff = 25;
 
-    public Target(int pointValue, int x, int y) {
+    private int pointValue;
+
+    private Paint paintBrush = new Paint();
+
+    private boolean isHit;
+
+    private boolean isScored;
+
+    public Target(int pointValue, int x, int y, boolean hit) {
         this.pointValue = pointValue;
         this.xCor = x;
         this.yCor = y;
+        this.isHit = hit;
         setPaintColor();
     }
 
@@ -57,6 +67,26 @@ public abstract class Target {
         }
     }
 
-    public abstract void drawTarget(Canvas canvas);
+    public void setHeight(int h) {
+        this.height = h;
+    }
+
+    public void drawTarget(Canvas canvas) {
+        canvas.drawOval((float)xCor, (float)yCor, (float)this.xCor+this.width, (float)this.yCor+this.height, paintBrush);
+    }
+
+    public boolean containsPoint(int x, int y) {
+        Rect r = new Rect(this.xCor, this.yCor, this.xCor+this.width+hitBuff, this.yCor+height+hitBuff);
+        return r.contains(x, y);
+    }
+
+    public void score() {
+        this.isScored = true;
+    }
+
+    public boolean isScored() {
+        return this.isScored;
+    }
+
 
 }

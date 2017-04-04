@@ -15,12 +15,9 @@ import android.graphics.Canvas;
 
 public class LargeTarget extends Target {
 
-    public LargeTarget(int pointValue, int x, int y) {
-        super(pointValue, x, y);
+    public LargeTarget(int pointValue, int x, int y, boolean hit) {
+        super(pointValue, x, y, hit);
+        setHeight(150);
     }
 
-    @Override
-    public void drawTarget(Canvas canvas) {
-        canvas.drawOval((float)xCor, (float)yCor, (float)xCor+20, (float)yCor+150, paintBrush);
-    }
 }

@@ -28,6 +28,8 @@ public class CannonMainActivity extends AppCompatActivity {
     private TextView notificationTV;
     private TextView scoreboardTV;
 
+    private int score;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +43,17 @@ public class CannonMainActivity extends AppCompatActivity {
         increaseAngleButton = (Button)findViewById(R.id.increaseAngleButton);
         decreaseAngleButton = (Button)findViewById(R.id.decreaseAngleButton);
         fireButton = (Button)findViewById(R.id.fireCannonBallButton);
-        increaseAngleButton.setOnClickListener(new increaseAngleButtonListener());
-        decreaseAngleButton.setOnClickListener(new decreaseAngleButtonListener());
+        increaseAngleButton.setOnTouchListener(new increaseAngleButtonListener());
+        decreaseAngleButton.setOnTouchListener(new decreaseAngleButtonListener());
         fireButton.setOnClickListener(new fireButtonListener());
 
         currentAngleTV = (TextView)findViewById(R.id.cannonAngleTextView);
         notificationTV = (TextView)findViewById(R.id.notificationTextView);
         scoreboardTV = (TextView)findViewById(R.id.scoreboardTextView);
+        score = 0;
         currentAngleTV.setText("Current Angle: 45 Degrees");
         notificationTV.setText("" + cannonAnimator.mainCannon.getCannonBallCount() + " cannonballs left.");
-        scoreboardTV.setText("Score: 0 Points");
+        scoreboardTV.setText("Score: " + this.score + " points.");
 
         myCanvas.invalidate();
 
@@ -58,22 +61,32 @@ public class CannonMainActivity extends AppCompatActivity {
 
     }
 
-    private class increaseAngleButtonListener implements Button.OnClickListener {
+    private class increaseAngleButtonListener implements Button.OnTouchListener {
 
         @Override
-        public void onClick(View v) {
-            cannonAnimator.increaseCannonAngle();
-            currentAngleTV.setText("Current Angle: " + cannonAnimator.getCannonAngle() + " degrees.");
+        public boolean onTouch(View v, MotionEvent event) {
+            if(cannonAnimator.mainCannon.getDegAngle() < 90) {
+                cannonAnimator.increaseCannonAngle();
+                currentAngleTV.setText("Current Angle: " + cannonAnimator.getCannonAngle() + " degrees.");
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }
 
-    private class decreaseAngleButtonListener implements Button.OnClickListener {
+    private class decreaseAngleButtonListener implements Button.OnTouchListener {
 
         @Override
-        public void onClick(View v) {
-            cannonAnimator.decreaseCannonAngle();
-            currentAngleTV.setText("Current Angle: " + cannonAnimator.getCannonAngle() + " degrees.");
+        public boolean onTouch(View v, MotionEvent event) {
+            if(cannonAnimator.mainCannon.getDegAngle() > 0) {
+                cannonAnimator.decreaseCannonAngle();
+                currentAngleTV.setText("Current Angle: " + cannonAnimator.getCannonAngle() + " degrees.");
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }
@@ -85,6 +98,13 @@ public class CannonMainActivity extends AppCompatActivity {
             if(cannonAnimator.mainCannon.getCannonBallCount() > 0) {
                 cannonAnimator.fireCannon();
                 notificationTV.setText("" + cannonAnimator.mainCannon.getCannonBallCount() + " balls left.");
+                for (Target t : cannonAnimator.targetList) {
+                    if (t.getIsHit() && !t.isScored()) {
+                        t.score();
+                        score += t.getPointWorth();
+                        scoreboardTV.setText("Score: " + score + " points.");
+                    }
+                }
             } else {
                 notificationTV.setText("Game Over.");
                 cannonAnimator.doPause();
