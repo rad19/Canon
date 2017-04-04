@@ -98,18 +98,20 @@ public class CannonMainActivity extends AppCompatActivity {
             if(cannonAnimator.mainCannon.getCannonBallCount() > 0) {
                 cannonAnimator.fireCannon();
                 notificationTV.setText("" + cannonAnimator.mainCannon.getCannonBallCount() + " balls left.");
-                for (Target t : cannonAnimator.targetList) {
-                    if (t.getIsHit() && !t.isScored()) {
-                        t.score();
-                        score += t.getPointWorth();
-                        scoreboardTV.setText("Score: " + score + " points.");
-                    }
-                }
+
             } else {
                 notificationTV.setText("Game Over.");
                 cannonAnimator.doPause();
             }
+            for (Target t : cannonAnimator.targetList) {
+                if (t.getIsHit() && !t.isScored()) {
+                    t.score();
+                    score += t.getPointWorth();
+                    scoreboardTV.setText("Score: " + score + " points.");
+                }
+            }
         }
+
     }
 
 }

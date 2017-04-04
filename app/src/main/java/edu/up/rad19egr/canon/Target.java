@@ -56,7 +56,7 @@ public abstract class Target {
     }
 
     public int getPointWorth() {
-        return pointValue;
+        return this.pointValue;
     }
 
     private void setPaintColor() {

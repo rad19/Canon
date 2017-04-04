@@ -27,9 +27,9 @@ public class CannonAnimator implements Animator {
     public AnimationBase base = new AnimationBase(0, 1140, 1600, 1400);
 
     // Small, medium, and large targets to be aimed at, respectively.
-    public SmallTarget target1 = new SmallTarget(5, 1000, 200, false);
+    public SmallTarget target1 = new SmallTarget(50, 1000, 200, false);
     public MediumTarget target2 = new MediumTarget(25, 1400, 100, false);
-    public LargeTarget target3 = new LargeTarget(50, 1300, 400, false);
+    public LargeTarget target3 = new LargeTarget(5, 1300, 400, false);
 
     // An ArrayList of Targets to store all of the targets to be used in the
     // animation.
@@ -138,7 +138,6 @@ public class CannonAnimator implements Animator {
             Target currTarget = targetList.get(i);
             if(isBallOnScreen && currTarget.containsPoint((int)ball.getCurrX(), (int)ball.getCurrY())) {
                 currTarget.setIsHit(true);
-                currTarget.score();
                 currTarget.drawTarget(c);
             }
         }
@@ -209,12 +208,6 @@ public class CannonAnimator implements Animator {
         } else {
             return false;
         }
-    }
-
-    // This method checks to see if any of the targets are hit.
-    // Returns a boolean representing if the most recent ball hit a target.
-    public boolean checkIfTargetHit() {
-        return false;
     }
 
 }
