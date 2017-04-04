@@ -1,3 +1,10 @@
+// Pouya Rad
+// 001776546
+// CS 301 A - Spring 2017
+// Dr. Andrew Nuxoll
+// HW Assignment 3
+// 3 March 2017
+
 package edu.up.rad19egr.canon;
 
 import android.graphics.Canvas;
@@ -14,7 +21,6 @@ public class LargeTarget extends Target {
 
     @Override
     public void drawTarget(Canvas canvas) {
-        canvas.drawRect((float)xCor, (float)yCor, (float)xCor+15, (float)yCor+150, paintBrush);
+        canvas.drawOval((float)xCor, (float)yCor, (float)xCor+20, (float)yCor+150, paintBrush);
     }
-
 }

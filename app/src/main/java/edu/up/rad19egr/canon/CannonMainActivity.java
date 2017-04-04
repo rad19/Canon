@@ -1,3 +1,10 @@
+// Pouya Rad
+// 001776546
+// CS 301 A - Spring 2017
+// Dr. Andrew Nuxoll
+// HW Assignment 3
+// 3 March 2017
+
 package edu.up.rad19egr.canon;
 
 import android.support.v7.app.AppCompatActivity;
@@ -10,16 +17,16 @@ import android.widget.TextView;
 
 public class CannonMainActivity extends AppCompatActivity {
 
-
     private AnimationCanvas myCanvas;
     private CannonAnimator cannonAnimator;
+
     private Button increaseAngleButton;
     private Button decreaseAngleButton;
     private Button fireButton;
+
     private TextView currentAngleTV;
     private TextView notificationTV;
     private TextView scoreboardTV;
-    private Cannon cannon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +37,6 @@ public class CannonMainActivity extends AppCompatActivity {
         myCanvas = new AnimationCanvas(this, cannonAnimator);
         LinearLayout mainLayout = (LinearLayout) this.findViewById(R.id.activity_cannon_main);
         mainLayout.addView(myCanvas);
-        /*
-        mainLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        */
 
         increaseAngleButton = (Button)findViewById(R.id.increaseAngleButton);
         decreaseAngleButton = (Button)findViewById(R.id.decreaseAngleButton);
@@ -90,9 +89,7 @@ public class CannonMainActivity extends AppCompatActivity {
                 notificationTV.setText("Game Over.");
                 cannonAnimator.doPause();
             }
-
         }
-
     }
 
 }

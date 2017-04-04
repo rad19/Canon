@@ -1,3 +1,10 @@
+// Pouya Rad
+// 001776546
+// CS 301 A - Spring 2017
+// Dr. Andrew Nuxoll
+// HW Assignment 3
+// 3 March 2017
+
 package edu.up.rad19egr.canon;
 
 import android.graphics.Canvas;
@@ -10,7 +17,7 @@ import android.graphics.Paint;
 
 public abstract class Target {
 
-    private int pointValue;
+    protected int pointValue;
 
     protected Paint paintBrush = new Paint();
 
@@ -42,7 +49,7 @@ public abstract class Target {
         return pointValue;
     }
 
-    public void setPaintColor() {
+    private void setPaintColor() {
         if(isHit) {
             paintBrush.setColor(Color.RED);
         } else {
@@ -51,6 +58,5 @@ public abstract class Target {
     }
 
     public abstract void drawTarget(Canvas canvas);
-
 
 }
