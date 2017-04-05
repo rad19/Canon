@@ -203,7 +203,7 @@ public class CannonAnimator implements Animator {
     // It returns a boolean true (the ball is off the screen) or false (ball is
     // off of the screen).
     public boolean checkIfOffScreen() {
-        if(ball.getCurrX() > canvasWidth || ball.getCurrY() > canvasHeight || ball.getCurrY() < 0) {
+        if(ball.getCurrX() > canvasWidth && (ball.getCurrY() > canvasHeight || ball.getCurrY() < 0)) {
             return true;
         } else {
             return false;

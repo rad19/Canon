@@ -26,7 +26,7 @@ public abstract class Target {
 
     private int width = 20;
 
-    private int hitBuff = 25;
+    private int hitBuff = 24;
 
     private int pointValue;
 
@@ -76,7 +76,7 @@ public abstract class Target {
     }
 
     public boolean containsPoint(int x, int y) {
-        Rect r = new Rect(this.xCor, this.yCor, this.xCor+this.width+hitBuff, this.yCor+height+hitBuff);
+        Rect r = new Rect(this.xCor-hitBuff, this.yCor-hitBuff, this.xCor+this.width+hitBuff, this.yCor+height+hitBuff);
         return r.contains(x, y);
     }
 
