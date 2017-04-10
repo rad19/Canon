@@ -72,7 +72,7 @@ public abstract class Target {
     }
 
     public void drawTarget(Canvas canvas) {
-        canvas.drawOval((float)xCor, (float)yCor, (float)this.xCor+this.width, (float)this.yCor+this.height, paintBrush);
+        canvas.drawOval((float)this.xCor, (float)this.yCor, (float)this.xCor+this.width, (float)this.yCor+this.height, paintBrush);
     }
 
     public boolean containsPoint(int x, int y) {
@@ -88,5 +88,22 @@ public abstract class Target {
         return this.isScored;
     }
 
+    public abstract void move(double t);
+
+    public int getXCor() {
+        return this.xCor;
+    }
+
+    public int getYCor() {
+        return this.yCor;
+    }
+
+    public void setXCor(int x) {
+        this.xCor = x;
+    }
+
+    public void setYCor(int y) {
+        this.yCor = y;
+    }
 
 }

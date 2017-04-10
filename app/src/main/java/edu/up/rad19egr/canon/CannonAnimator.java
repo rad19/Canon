@@ -42,6 +42,8 @@ public class CannonAnimator implements Animator {
     // The Cannonball that is currently in the animation.
     public Cannonball ball;
 
+    public ArrayList<Cannonball> cannonballs = new ArrayList<>();
+
     // A boolean indicating if the Cannon has been fired.
     private boolean isFired = false;
 
@@ -99,6 +101,9 @@ public class CannonAnimator implements Animator {
         double t = (10 * (time - fireTime) / 1000);
 
         for(Target target : targetList) {
+            if(!target.getIsHit()) {
+                target.move(t);
+            }
             target.drawTarget(c);
         }
 
@@ -106,8 +111,11 @@ public class CannonAnimator implements Animator {
         // its motion.
         if(isBallOnScreen) {
             time = time + 1;
-            ball.move(t * 10);
-            ball.drawCannonball(c);
+            for(Cannonball cb : cannonballs) {
+                cb.move(t * 10);
+                cb.drawCannonball(c);
+            }
+
         }
 
         // Draw the base of the animation, the cannon (depending on its angle),
@@ -192,6 +200,7 @@ public class CannonAnimator implements Animator {
         time = fireTime;
 
         ball = mainCannon.fire();
+        cannonballs.add(ball);
 
         // Set appropriate booleans as true.
         this.isBallOnScreen = true;
@@ -209,5 +218,7 @@ public class CannonAnimator implements Animator {
             return false;
         }
     }
+
+
 
 }

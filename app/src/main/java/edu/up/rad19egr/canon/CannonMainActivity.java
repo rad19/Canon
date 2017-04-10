@@ -7,6 +7,7 @@
 
 package edu.up.rad19egr.canon;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -28,6 +29,8 @@ public class CannonMainActivity extends AppCompatActivity {
     private TextView notificationTV;
     private TextView scoreboardTV;
 
+    private MediaPlayer mp;
+
     private int score;
 
     @Override
@@ -46,6 +49,7 @@ public class CannonMainActivity extends AppCompatActivity {
         increaseAngleButton.setOnTouchListener(new increaseAngleButtonListener());
         decreaseAngleButton.setOnTouchListener(new decreaseAngleButtonListener());
         fireButton.setOnClickListener(new fireButtonListener());
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.blast);
 
         currentAngleTV = (TextView)findViewById(R.id.cannonAngleTextView);
         notificationTV = (TextView)findViewById(R.id.notificationTextView);
@@ -96,6 +100,16 @@ public class CannonMainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if(cannonAnimator.mainCannon.getCannonBallCount() > 0) {
+                try {
+                    if (mp.isPlaying()) {
+                        mp.stop();
+                        mp.release();
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.blast);
+                    }
+                    mp.start();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
                 cannonAnimator.fireCannon();
                 notificationTV.setText("" + cannonAnimator.mainCannon.getCannonBallCount() + " balls left.");
 

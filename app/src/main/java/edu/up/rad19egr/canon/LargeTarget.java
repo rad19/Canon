@@ -20,4 +20,8 @@ public class LargeTarget extends Target {
         setHeight(150);
     }
 
+    public void move(double t) {
+
+    }
+
 }

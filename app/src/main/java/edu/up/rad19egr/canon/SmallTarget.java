@@ -20,4 +20,9 @@ public class SmallTarget extends Target {
         setHeight(50);
     }
 
+    public void move(double t) {
+        setXCor(getXCor());
+        setYCor((int) t * getYCor() % 50);
+    }
+
 }

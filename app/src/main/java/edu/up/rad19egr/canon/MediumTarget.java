@@ -13,4 +13,8 @@ public class MediumTarget extends Target {
         setHeight(100);
     }
 
+    public void move(double t) {
+
+    }
+
 }

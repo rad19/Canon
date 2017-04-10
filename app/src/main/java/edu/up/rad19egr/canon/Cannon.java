@@ -99,6 +99,10 @@ public class Cannon {
         canvas.drawCircle((float)this.position.x, (float)this.position.y, 40f, paintBrush);
     }
 
+    public void drawFuse(Canvas canvas) {
+
+    }
+
     // This method increases the cannon's angle when called and sets both the
     // angle in degrees and radians after it is updated.
     public void increaseAngle() {
