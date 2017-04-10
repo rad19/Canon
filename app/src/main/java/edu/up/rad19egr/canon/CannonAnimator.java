@@ -111,10 +111,14 @@ public class CannonAnimator implements Animator {
         // its motion.
         if(isBallOnScreen) {
             time = time + 1;
+            ball.move(t * 10, mainCannon.getGravity());
+            ball.drawCannonball(c);
+            /*
             for(Cannonball cb : cannonballs) {
                 cb.move(t * 10);
                 cb.drawCannonball(c);
             }
+            */
 
         }
 
@@ -200,7 +204,7 @@ public class CannonAnimator implements Animator {
         time = fireTime;
 
         ball = mainCannon.fire();
-        cannonballs.add(ball);
+        // cannonballs.add(ball);
 
         // Set appropriate booleans as true.
         this.isBallOnScreen = true;

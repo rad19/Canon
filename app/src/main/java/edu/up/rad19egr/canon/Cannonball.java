@@ -17,8 +17,7 @@ import android.graphics.Paint;
 
 public class Cannonball {
 
-    // Arbitrarily chosen gravitational constant.
-    private final double G = 100;
+
 
     // Initial X & Y positions of the cannonball
     private double initX;
@@ -68,9 +67,9 @@ public class Cannonball {
     // NOTE: these equations and the motion of the ball do not accurately
     // reflect motion in real life, unfortunately. Yet here I am, using
     // physics in my CS class. I never thought the day would come.
-    public void move(double t) {
+    public void move(double t, int g) {
         this.currX = this.initX + (this.xVelocity * t);
-        this.currY = this.initY - (this.yVelocity * t) + (.5 * G * (t * t));
+        this.currY = this.initY - (this.yVelocity * t) + (.5 * g * (t * t));
     }
 
     // This method gets the current X position of the cannonball.
@@ -89,5 +88,7 @@ public class Cannonball {
     public int getVelocity() {
         return velocity;
     }
+
+
 
 }

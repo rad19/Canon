@@ -14,7 +14,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class CannonMainActivity extends AppCompatActivity {
 
@@ -28,6 +31,9 @@ public class CannonMainActivity extends AppCompatActivity {
     private TextView currentAngleTV;
     private TextView notificationTV;
     private TextView scoreboardTV;
+    private TextView gravityTV;
+
+    private SeekBar gravitySeekBar;
 
     private MediaPlayer mp;
 
@@ -49,15 +55,22 @@ public class CannonMainActivity extends AppCompatActivity {
         increaseAngleButton.setOnTouchListener(new increaseAngleButtonListener());
         decreaseAngleButton.setOnTouchListener(new decreaseAngleButtonListener());
         fireButton.setOnClickListener(new fireButtonListener());
-        mp = MediaPlayer.create(getApplicationContext(), R.raw.blast);
 
         currentAngleTV = (TextView)findViewById(R.id.cannonAngleTextView);
         notificationTV = (TextView)findViewById(R.id.notificationTextView);
         scoreboardTV = (TextView)findViewById(R.id.scoreboardTextView);
+        gravityTV = (TextView)findViewById(R.id.gravityTV);
         score = 0;
         currentAngleTV.setText("Current Angle: 45 Degrees");
         notificationTV.setText("" + cannonAnimator.mainCannon.getCannonBallCount() + " cannonballs left.");
         scoreboardTV.setText("Score: " + this.score + " points.");
+        gravityTV.setText("Gravity: 100");
+
+        gravitySeekBar = (SeekBar)findViewById(R.id.gravitySeekBar);
+        gravitySeekBar.setOnSeekBarChangeListener(new gravitySeekBarListener());
+        gravitySeekBar.setProgress(100);
+
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.blast);
 
         myCanvas.invalidate();
 
@@ -110,6 +123,16 @@ public class CannonMainActivity extends AppCompatActivity {
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
+                /**
+                 External Citation
+                 * Date: 9 April 2017
+                 * Problem: Wanted to play sound on button press.
+                 * Resource: http://stackoverflow.com/questions/18459122/
+                             play-sound-on-button-click-android
+                 * Solution: I used the example code that a user provided and adapted
+                             it for my own use.
+                 */
+
                 cannonAnimator.fireCannon();
                 notificationTV.setText("" + cannonAnimator.mainCannon.getCannonBallCount() + " balls left.");
 
@@ -126,6 +149,28 @@ public class CannonMainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private class gravitySeekBarListener implements SeekBar.OnSeekBarChangeListener {
+        @Override
+        public void onProgressChanged(SeekBar gravitySeekBar, int i, boolean b) {
+            gravityTV.setText("Gravity: " + gravitySeekBar.getProgress());
+            if(cannonAnimator.ball == null) {
+                cannonAnimator.mainCannon.setGravity(gravitySeekBar.getProgress());
+                myCanvas.invalidate();
+            }
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+
+
+        }
     }
 
 }

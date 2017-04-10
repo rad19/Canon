@@ -9,7 +9,6 @@
     tools:context="edu.up.rad19egr.canon.CannonMainActivity">
 
 
-
     <LinearLayout
         android:id="@+id/sideBar"
         android:layout_width="0dp"
@@ -20,12 +19,30 @@
         android:weightSum="14">
 
         <TextView
+            android:id="@+id/gravityTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <SeekBar
+            android:id="@+id/gravitySeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:max="250" />
+
+        <TextView
             android:id="@+id/cannonAngleTextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:paddingBottom="80dp"
-            android:paddingTop="80dp"
+            android:paddingBottom="60dp"
+            android:paddingTop="60dp"
             android:text="Angle"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
@@ -79,8 +96,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:paddingBottom="80dp"
-            android:paddingTop="80dp"
+            android:paddingBottom="60dp"
+            android:paddingTop="60dp"
             android:text="Notification"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
@@ -119,14 +136,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:paddingBottom="80dp"
-            android:paddingTop="80dp"
+            android:paddingBottom="60dp"
+            android:paddingTop="60dp"
             android:text="Scoreboard"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>

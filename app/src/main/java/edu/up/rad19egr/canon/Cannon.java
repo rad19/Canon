@@ -20,6 +20,9 @@ import java.util.ArrayList;
 
 public class Cannon {
 
+    // Arbitrarily chosen gravitational constant.
+    private int G = 100;
+
     // Starting amount of cannonballs, user has this many chances to hit
     // the targets.
     private int cannonBallCount = 10;
@@ -162,6 +165,14 @@ public class Cannon {
     // cannon.
     public Point getPosition() {
         return this.position;
+    }
+
+    public void setGravity(int g) {
+        this.G = g;
+    }
+
+    public int getGravity() {
+        return this.G;
     }
 
 }
