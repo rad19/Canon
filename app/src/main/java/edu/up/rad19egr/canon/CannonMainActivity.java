@@ -61,6 +61,7 @@ public class CannonMainActivity extends AppCompatActivity {
         scoreboardTV = (TextView)findViewById(R.id.scoreboardTextView);
         gravityTV = (TextView)findViewById(R.id.gravityTV);
         score = 0;
+        // Default starting angle
         currentAngleTV.setText("Current Angle: 45 Degrees");
         notificationTV.setText("" + cannonAnimator.mainCannon.getCannonBallCount() + " cannonballs left.");
         scoreboardTV.setText("Score: " + this.score + " points.");
@@ -70,6 +71,7 @@ public class CannonMainActivity extends AppCompatActivity {
         gravitySeekBar.setOnSeekBarChangeListener(new gravitySeekBarListener());
         gravitySeekBar.setProgress(100);
 
+        // Mediaplayer for playing sounds
         mp = MediaPlayer.create(getApplicationContext(), R.raw.blast);
 
         myCanvas.invalidate();
@@ -78,6 +80,7 @@ public class CannonMainActivity extends AppCompatActivity {
 
     }
 
+    // Button listener for the button used to increase the cannon's angle.
     private class increaseAngleButtonListener implements Button.OnTouchListener {
 
         @Override
@@ -93,6 +96,7 @@ public class CannonMainActivity extends AppCompatActivity {
 
     }
 
+    // Button listener for the button used to decrease the cannon's angle.
     private class decreaseAngleButtonListener implements Button.OnTouchListener {
 
         @Override
@@ -108,11 +112,13 @@ public class CannonMainActivity extends AppCompatActivity {
 
     }
 
+    // Button listener for the button used to fire the cannon.
     private class fireButtonListener implements Button.OnClickListener {
 
         @Override
         public void onClick(View v) {
             if(cannonAnimator.mainCannon.getCannonBallCount() > 0) {
+                // Play the sound for the cannon firing.
                 try {
                     if (mp.isPlaying()) {
                         mp.stop();
@@ -135,11 +141,11 @@ public class CannonMainActivity extends AppCompatActivity {
 
                 cannonAnimator.fireCannon();
                 notificationTV.setText("" + cannonAnimator.mainCannon.getCannonBallCount() + " balls left.");
-
             } else {
                 notificationTV.setText("Game Over.");
                 cannonAnimator.doPause();
             }
+            // Check all of the targets and score them if necessary.
             for (Target t : cannonAnimator.targetList) {
                 if (t.getIsHit() && !t.isScored()) {
                     t.score();
@@ -151,6 +157,7 @@ public class CannonMainActivity extends AppCompatActivity {
 
     }
 
+    // Seekbar for adjusting the gravity.
     private class gravitySeekBarListener implements SeekBar.OnSeekBarChangeListener {
         @Override
         public void onProgressChanged(SeekBar gravitySeekBar, int i, boolean b) {
@@ -168,7 +175,6 @@ public class CannonMainActivity extends AppCompatActivity {
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-
 
         }
     }
