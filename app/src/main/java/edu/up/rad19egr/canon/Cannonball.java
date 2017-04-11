@@ -3,7 +3,7 @@
 // CS 301 A - Spring 2017
 // Dr. Andrew Nuxoll
 // HW Assignment 3
-// 3 March 2017
+// Part A: 3 April 2017; Part B: 10 April 2017
 
 package edu.up.rad19egr.canon;
 
@@ -18,8 +18,6 @@ import java.util.Random;
  */
 
 public class Cannonball {
-
-
 
     // Initial X & Y positions of the cannonball
     private double initX;
@@ -40,6 +38,9 @@ public class Cannonball {
     // Each cannonball will be black
     private Paint cannonballPaint = new Paint(Color.BLACK);
 
+    // Boolean to indicate if the cannonball has hit the ground after being
+    // fired, initially set to false because it will be above the ground when
+    // fired.
     public boolean isOnGround = false;
 
     // Constructor for Cannonball.
@@ -73,7 +74,9 @@ public class Cannonball {
     // physics in my CS class. I never thought the day would come.
     public void move(double t, int g) {
         this.currX = this.initX + (this.xVelocity * t);
+        // Check to see if the ball has hit the ground
         if(isOnGround) {
+            // the hard coded top of the floor minus radius of ball
             this.currY = 1140 - 16;
         } else {
             this.currY = this.initY - (this.yVelocity * t) + (.5 * g * (t * t));
@@ -85,6 +88,7 @@ public class Cannonball {
     public double getCurrX() {
         return this.currX;
     }
+
     // This method gets the current Y position of the cannonball.
     // It returns a double of the Y-Coordinate.
     public double getCurrY() {

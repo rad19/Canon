@@ -3,7 +3,7 @@
 // CS 301 A - Spring 2017
 // Dr. Andrew Nuxoll
 // HW Assignment 3
-// 3 March 2017
+// Part A: 3 April 2017; Part B: 10 April 2017
 
 package edu.up.rad19egr.canon;
 
@@ -94,6 +94,7 @@ public class CannonAnimator implements Animator {
         // animation frame.
         count++;
 
+        // Draws all of the targets to be used in the animation.
         for(Target t : targetList) {
             t.drawTarget(c);
         }
@@ -106,6 +107,9 @@ public class CannonAnimator implements Animator {
         // its motion.
         if(isBallOnScreen) {
             time = time + 1;
+            // Checks to see if the cannonball has gotten to the ground if it
+            // is still on the screen. Sets the boolean indicating if it has
+            // touched the ground to true if necessary.
             if(ball.getCurrY() >= 1140 - 16) {
                 ball.isOnGround = true;
             }
@@ -137,14 +141,17 @@ public class CannonAnimator implements Animator {
             }
         }
 
+        // Checks each target to see if it has been hit by the current ball
+        // and then updates accordingly.
         for(int i = 0; i < targetList.size(); i++) {
             Target currTarget = targetList.get(i);
-            if(isBallOnScreen && currTarget.containsPoint((int)ball.getCurrX(), (int)ball.getCurrY())) {
+            if(isBallOnScreen && currTarget.containsPoint(
+                                 (int)ball.getCurrX(), (int)ball.getCurrY())) {
+
                 currTarget.setIsHit(true);
                 currTarget.drawTarget(c);
             }
         }
-
     }
 
     // Tells whether the animation should be paused.
@@ -164,7 +171,7 @@ public class CannonAnimator implements Animator {
     }
 
     // This method is called whenever the user touches the AnimationCanvas
-    // so that it can respond to the event.
+    // so that it can respond to the event. Not implemented for this animation.
     @Override
     public void onTouch(MotionEvent event) {
 
@@ -194,6 +201,7 @@ public class CannonAnimator implements Animator {
         fireTime = count;
         time = fireTime;
 
+        // Fires the cannonball from the cannon.
         ball = mainCannon.fire();
 
         // Set appropriate booleans as true.
@@ -212,7 +220,5 @@ public class CannonAnimator implements Animator {
             return false;
         }
     }
-
-
 
 }

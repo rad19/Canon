@@ -2,7 +2,7 @@
 // 001776546
 // CS 301 A - Spring 2017
 // Dr. Andrew Nuxoll
-// 3 March 2017
+// Part A: 3 April 2017; Part B: 10 April 2017
 
 package edu.up.rad19egr.canon;
 
