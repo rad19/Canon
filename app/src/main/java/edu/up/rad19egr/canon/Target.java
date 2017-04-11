@@ -19,27 +19,26 @@ import android.graphics.Rect;
 public abstract class Target {
 
     private int xCor;
-
     private int yCor;
-
+    private int initXCor;
+    private int initYCor;
     private int height;
-
     private int width = 20;
 
     private int hitBuff = 24;
-
     private int pointValue;
 
     private Paint paintBrush = new Paint();
 
     private boolean isHit;
-
     private boolean isScored;
 
     public Target(int pointValue, int x, int y, boolean hit) {
         this.pointValue = pointValue;
         this.xCor = x;
+        this.initXCor = x;
         this.yCor = y;
+        this.initYCor = y;
         this.isHit = hit;
         setPaintColor();
     }
@@ -88,8 +87,6 @@ public abstract class Target {
         return this.isScored;
     }
 
-    public abstract void move(double t);
-
     public int getXCor() {
         return this.xCor;
     }
@@ -104,6 +101,14 @@ public abstract class Target {
 
     public void setYCor(int y) {
         this.yCor = y;
+    }
+
+    public int getInitXCor() {
+        return this.xCor;
+    }
+
+    public int getInitYCor() {
+        return this.yCor;
     }
 
 }

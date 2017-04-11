@@ -11,6 +11,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import java.util.Random;
+
 /**
  * Created by PouyaRad on 3/29/17.
  */
@@ -37,6 +39,8 @@ public class Cannonball {
 
     // Each cannonball will be black
     private Paint cannonballPaint = new Paint(Color.BLACK);
+
+    public boolean isOnGround = false;
 
     // Constructor for Cannonball.
     // Accepts 4 parameters: integers X & Y, for the starting position of the
@@ -69,7 +73,11 @@ public class Cannonball {
     // physics in my CS class. I never thought the day would come.
     public void move(double t, int g) {
         this.currX = this.initX + (this.xVelocity * t);
-        this.currY = this.initY - (this.yVelocity * t) + (.5 * g * (t * t));
+        if(isOnGround) {
+            this.currY = 1140 - 16;
+        } else {
+            this.currY = this.initY - (this.yVelocity * t) + (.5 * g * (t * t));
+        }
     }
 
     // This method gets the current X position of the cannonball.
@@ -88,7 +96,5 @@ public class Cannonball {
     public int getVelocity() {
         return velocity;
     }
-
-
 
 }
